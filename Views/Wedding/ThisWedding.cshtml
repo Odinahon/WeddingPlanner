@@ -1,0 +1,8 @@
+<h1>@ViewBag.wedding.WedderOne and @ViewBag.wedding.WedderTwo'S Wedding</h1>
+<h3>Date: @ViewBag.wedding.WeddingDate.ToString("MM/dd/yyyy");</h3>
+<h3>Guests:</h3>
+<ul>
+    <br> @foreach(var u in ViewBag.wedding.Guests){
+    <li>@u.User.FirstName @u.User.LastName</li>
+    }
+</ul>

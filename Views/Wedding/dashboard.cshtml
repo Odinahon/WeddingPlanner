@@ -1,0 +1,45 @@
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+@model IEnumerable<WeddingPlanner.Models.Wedding>
+<h3>Welcome to the Wedding Planner , @ViewBag.UserName </h3>
+<div>
+    <a href="/logout">Logout</a>
+    <form action="/weddingpage">
+    <button>New Wedding</button>
+    </form>
+</div>
+<p></p><br>
+<div>
+
+<table style="width:30%">
+<tr>
+    <th>Wedding</th>
+    <th>Date</th>
+    <th>Guest</th>
+    <th>Action</th>
+</tr>
+@foreach (var wedd in Model){var flag=false;
+<tr>
+    <td> <a href ="thiswedding/@wedd.WeddingId">@wedd.WedderOne & @wedd.WedderTwo</a></td>
+    <td>@wedd.WeddingDate.ToString("MMM dd, yyyy")</td>
+    <td>@wedd.Guests.Count</td>
+    
+
+@foreach(var g in @wedd.Guests){ @if(@g.UserId==@ViewBag.session && @g.WeddingId==@wedd.WeddingId){ flag=true; }} @if(@wedd.UserId==@ViewBag.session){
+            <td><a href="delete/@wedd.WeddingId">Delete</a></td>
+            }else if(flag==false){
+            <td><a href="RSVP/@wedd.WeddingId">RSVP</a></td>
+            }else if(flag==true){
+            <td><a href="unRSVP/@wedd.WeddingId">unRSVP</a></td>
+            }
+            
+</tr>
+}
+<!-- <td> <a href="">RSVP</a></td>
+<td> <a href="">Un-RSVP</a> </td> -->
+
+</table>
+</div>
